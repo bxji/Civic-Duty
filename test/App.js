@@ -2,57 +2,70 @@ import React from 'react';
 import { FlatList, StyleSheet, Text, View, Button } from 'react-native';
 
 class Movie extends React.Component {
-  render() {
-    return (
-      <Text>{this.props.title}</Text>
-    );
-  }
+    render() {
+        return (
+            <Text>{this.props.title}</Text>
+        );
+    }
 }
 
 export default class App extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      title: 'hey'
+    constructor(props) {
+        super(props);
+        this.state = {
+            title: 'hey'
+        }
+        this.title = "hi";
     }
-    this.title = "hi";
-  }
 
-  componentDidMount() {
-    return fetch('https://www.googleapis.com/civicinfo/v2/elections?key=AIzaSyAEDMe9X4hv9FNSqjYEBaCnPCguHK44rfY')
-      .then((response) => response.json())
-      .then((responseJson) => {
+    componentDidMount() {
+        {/*return fetch('https://www.googleapis.com/civicinfo/v2/elections?key=AIzaSyAEDMe9X4hv9FNSqjYEBaCnPCguHK44rfY')
+            .then((response) => response.json())
+            .then((responseJson) => {
   
-        this.setState({
+            this.setState({
+                dataSource: responseJson.elections,
+            }, function() {
   
-          dataSource: responseJson.elections,
-        }, function() {
-  
+            });
+        })*/}
+        return fetch('http://localhost:8000/api/', {
+            method: 'POST',
+            headers: {
+                Accept: 'application/json',
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({
+                zip: '92129',
+            })
+        })
+        .then((response) => response.json())
+            .then((responseJson) => {
+
+                this.setState({
+                    dataSource: responseJson.officials,
+                }, function() {
+      
+                });
+            })
+        .catch((error) => {
+            console.error(error);
         });
-      })
-      /*.then((responseJson) => {
-        alert(responseJson.movies[0].title);
-        console.log(responseJson.movies);
-        return responseJson.movies;
-      })*/
-      .catch((error) => {
-        console.error(error);
-      });
-  }
+    }
 
 
-  render() {
+    render() {
 
-    return (
-      <View style={{flex: 1, paddingTop:20}}>
-        <FlatList
-          data = {this.state.dataSource}
-          renderItem = {({item}) => <Text>{item.name}, {item.electionDay}, {/*{item.ocdDivisionId}*/}</Text>}
-          keyExtractor={(item, index) => index.toString()}
-        />
-      </View>
-    );
-  }
+        return (
+            <View style={{flex: 1, paddingTop:20}}>
+                <FlatList
+                    data = {this.state.dataSource}
+                    renderItem = {({item}) => <Text>{item.name}, {item.electionDay}, {/*{item.ocdDivisionId}*/}</Text>}
+                    keyExtractor={(item, index) => index.toString()}
+                />
+            </View>
+        );
+    }
 }
 
 const styles = StyleSheet.create({
