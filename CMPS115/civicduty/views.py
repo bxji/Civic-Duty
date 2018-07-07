@@ -31,7 +31,8 @@ class CivicDutyAPI(APIView):
         #    'senators': ['Dianne Feinstein', 'Kamala Harris']
         #}
 
-        random_data = requests.get('https://www.googleapis.com/civicinfo/v2/elections?key=AIzaSyAEDMe9X4hv9FNSqjYEBaCnPCguHK44rfY').json()
+        #random_data = requests.get('https://www.googleapis.com/civicinfo/v2/elections?key=AIzaSyAEDMe9X4hv9FNSqjYEBaCnPCguHK44rfY').json()
+        random_data = requests.get('https://www.googleapis.com/civicinfo/v2/representatives?key=AIzaSyAEDMe9X4hv9FNSqjYEBaCnPCguHK44rfY&address=92129').json()
 
         return Response(random_data)
         #return Response({'senators': ['Dianne Feinstein', 'Kamala Harris']})
@@ -39,4 +40,10 @@ class CivicDutyAPI(APIView):
     def post(self, request):
         #form = HomeForm(request.post)
 
-        return Response({})
+        data = request.data
+        #print(data)
+
+        random_data = requests.get('https://www.googleapis.com/civicinfo/v2/representatives?address=' + data['zip'] + '&key=AIzaSyAEDMe9X4hv9FNSqjYEBaCnPCguHK44rfY').json()
+        #random_data = requests.post('https://www.googleapis.com/civicinfo/v2/representatives?key=AIzaSyAEDMe9X4hv9FNSqjYEBaCnPCguHK44rfY', data={'address': '92129'}).json()
+
+        return Response(random_data)
