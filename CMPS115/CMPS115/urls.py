@@ -17,10 +17,14 @@ from django.contrib import admin
 from django.urls import path
 from django.views.generic import TemplateView
 from civicduty import views
-from civicduty.views import CivicDutyAPI
+from civicduty.views import RepresentativesAPI
+from civicduty.views import ElectionsAPI
+from civicduty.views import PollingAPI
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('hello/', views.hello),
-    path('api/', CivicDutyAPI.as_view())
+    path('representative/', RepresentativesAPI.as_view()),
+    path('elections/', ElectionsAPI.as_view()),
+    path('polling/', PollingAPI.as_view()),
 ]

@@ -20,30 +20,51 @@ def hello(request):
 
     return render(request, "civicduty/hello.html", args)
 
-class CivicDutyAPI(APIView):
+# get representatives.
+class RepresentativesAPI(APIView):
 
     def get(self, request):
-        #populations = [100000, 200000, 300000, 400000, 500000]
+        reps = requests.get('https://www.googleapis.com/civicinfo/v2/representatives?key=AIzaSyAEDMe9X4hv9FNSqjYEBaCnPCguHK44rfY&address=92129').json()
 
-        #args = {
-        #    'name': 'Bryan',
-        #    'populations': populations,
-        #    'senators': ['Dianne Feinstein', 'Kamala Harris']
-        #}
+        return Response(reps)
 
-        #random_data = requests.get('https://www.googleapis.com/civicinfo/v2/elections?key=AIzaSyAEDMe9X4hv9FNSqjYEBaCnPCguHK44rfY').json()
-        random_data = requests.get('https://www.googleapis.com/civicinfo/v2/representatives?key=AIzaSyAEDMe9X4hv9FNSqjYEBaCnPCguHK44rfY&address=92129').json()
+    # may add full address in future.
+    def post(self, request):
+        data = request.data
+        zip = data['zip'].strip()
+        reps = requests.get('https://www.googleapis.com/civicinfo/v2/representatives?address=' + zip + '&key=AIzaSyAEDMe9X4hv9FNSqjYEBaCnPCguHK44rfY').json()
+
+        return Response(reps)
+
+# upcoming elections
+class ElectionsAPI(APIView):
+
+    # upcoming elections. only GET
+    def get(self, request):
+        random_data = requests.get('https://www.googleapis.com/civicinfo/v2/elections?key=AIzaSyAEDMe9X4hv9FNSqjYEBaCnPCguHK44rfY').json()
 
         return Response(random_data)
-        #return Response({'senators': ['Dianne Feinstein', 'Kamala Harris']})
 
+    # need to do functionality of pulling and checking if the elections are relevant to user, aka if in same state, city, etc.
     def post(self, request):
-        #form = HomeForm(request.post)
+        random_data = requests.get('https://www.googleapis.com/civicinfo/v2/elections?key=AIzaSyAEDMe9X4hv9FNSqjYEBaCnPCguHK44rfY').json()
+
+        return Response(random_data)
+
+# local polling places
+class PollingAPI(APIView):
+
+    # takes in street, city, state
+    def post(self, request):
 
         data = request.data
-        #print(data)
+        street = data['street'].strip()
+        city = data['city'].strip()
+        state = data['state'].strip()
 
-        random_data = requests.get('https://www.googleapis.com/civicinfo/v2/representatives?address=' + data['zip'] + '&key=AIzaSyAEDMe9X4hv9FNSqjYEBaCnPCguHK44rfY').json()
-        #random_data = requests.post('https://www.googleapis.com/civicinfo/v2/representatives?key=AIzaSyAEDMe9X4hv9FNSqjYEBaCnPCguHK44rfY', data={'address': '92129'}).json()
+        link = 'https://www.googleapis.com/civicinfo/v2/voterinfo?key=AIzaSyAEDMe9X4hv9FNSqjYEBaCnPCguHK44rfY&address='
+
+        random_data = requests.get(link + street + ' ' + city + ' ' + state).json()
 
         return Response(random_data)
+
