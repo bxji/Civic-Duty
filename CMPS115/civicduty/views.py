@@ -45,7 +45,7 @@ class ElectionsAPI(APIView):
 
         return Response(random_data)
 
-    # need to do functionality of pulling and checking if the elections are relevant to user, aka if in same state, city, etc.
+    # need to do functionality of only displaying elections relevant to user location
     def post(self, request):
         random_data = requests.get('https://www.googleapis.com/civicinfo/v2/elections?key=AIzaSyAEDMe9X4hv9FNSqjYEBaCnPCguHK44rfY').json()
 
@@ -55,16 +55,18 @@ class ElectionsAPI(APIView):
 class PollingAPI(APIView):
 
     # takes in street, city, state
+    # may also need election id?
     def post(self, request):
 
         data = request.data
+        election = data['id'].strip()
         street = data['street'].strip()
         city = data['city'].strip()
         state = data['state'].strip()
 
         link = 'https://www.googleapis.com/civicinfo/v2/voterinfo?key=AIzaSyAEDMe9X4hv9FNSqjYEBaCnPCguHK44rfY&address='
 
-        random_data = requests.get(link + street + ' ' + city + ' ' + state).json()
+        random_data = requests.get(link + street + ' ' + city + ' ' + state + '&electionId=' + election).json()
 
         return Response(random_data)
 
