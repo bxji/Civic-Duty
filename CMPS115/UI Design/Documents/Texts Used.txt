@@ -1,0 +1,20 @@
+                           Fonts                 Size  Type
+
+                      
+Main Menu Page 
+
+Title:                     Georgia               27    Bold
+
+Subtitle:                  Baskerville Old Face  13    Regular
+
+Buttons:                   Arial                 16    Regular
+
+
+
+Senator List Page
+
+Title:                     Georgia               15    Bold   
+
+Text:                      Caliornian Fb         14    Regular
+
+
