@@ -25,7 +25,7 @@ SECRET_KEY = ')_b)5i#2k0+3#emz31wpbrpd55u924g1@=@+4saicm6=q84#(b'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['0.0.0.0', 'localhost']
+ALLOWED_HOSTS = ['0.0.0.0', 'localhost', 'http://civic-duty.herokuapp.com/']
 
 
 # Application definition
