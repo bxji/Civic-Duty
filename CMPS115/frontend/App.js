@@ -2,15 +2,62 @@ import React from 'react';
 import { StyleSheet, Text, View } from 'react-native';
 
 export default class App extends React.Component {
-  render() {
-    return (
-      <View style={styles.container}>
-        <Text>Open up App.js to start working on your app!</Text>
-        <Text>Changes you make will automatically reload.</Text>
-        <Text>Shake your phone to open the developer menu.</Text>
-      </View>
-    );
-  }
+    constructor(props) {
+        super(props);
+        this.state = {
+            title: 'hey'
+        }
+        this.title = "hi";
+    }
+
+    componentDidMount() {
+        {/*return fetch('https://www.googleapis.com/civicinfo/v2/elections?key=AIzaSyAEDMe9X4hv9FNSqjYEBaCnPCguHK44rfY')
+            .then((response) => response.json())
+            .then((responseJson) => {
+  
+            this.setState({
+                dataSource: responseJson.elections,
+            }, function() {
+  
+            });
+        })*/}
+        return fetch('http://civic-duty.herokuapp.com/representative/', {
+            method: 'POST',
+            headers: {
+                Accept: 'application/json',
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({
+                zip: '92129',
+            })
+        })
+        .then((response) => response.json())
+            .then((responseJson) => {
+
+                this.setState({
+                    dataSource: responseJson.officials,
+                }, function() {
+      
+                });
+            })
+        .catch((error) => {
+            console.error(error);
+        });
+    }
+
+
+    render() {
+
+        return (
+            <View style={{flex: 1, paddingTop:20}}>
+                <FlatList
+                    data = {this.state.dataSource}
+                    renderItem = {({item}) => <Text>{item.name}, {item.party}, {/*{item.ocdDivisionId}*/}</Text>}
+                    keyExtractor={(item, index) => index.toString()}
+                />
+            </View>
+        );
+    }
 }
 
 const styles = StyleSheet.create({
