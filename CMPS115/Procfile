@@ -1,0 +1,1 @@
+web: web: gunicorn CMPS115.wsgi:application --log-file -
