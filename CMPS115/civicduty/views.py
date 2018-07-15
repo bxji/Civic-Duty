@@ -5,6 +5,9 @@ import requests
 
 # Create your views here.
 
+def index(request):
+    return render(request, "civicduty/index.html")
+
 def hello(request):
 
     # the third parameter is a dictionary object with all the data I want

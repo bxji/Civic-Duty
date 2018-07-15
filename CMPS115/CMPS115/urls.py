@@ -23,6 +23,9 @@ from civicduty.views import PollingAPI
 
 urlpatterns = [
     path('admin/', admin.site.urls),
+    path('', views.index),
+    path('/', views.index),
+    path('index/', views.index),
     path('hello/', views.hello),
     path('representative/', RepresentativesAPI.as_view()),
     path('elections/', ElectionsAPI.as_view()),
