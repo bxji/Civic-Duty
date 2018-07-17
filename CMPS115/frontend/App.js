@@ -2,13 +2,21 @@ import React from 'react';
 import { FlatList, StyleSheet, Text, View, Button } from 'react-native';
 
 export default class App extends React.Component {
+/*   render() {
+    return (
+      <View style={styles.container}>
+        <Text>Hello world!</Text>
+      </View>
+    );
+  }
+
     constructor(props) {
         super(props);
         this.state = {
             title: 'hey'
         }
         this.title = "hi";
-    }
+    } */
 
     componentDidMount() {
         {/*return fetch('https://www.googleapis.com/civicinfo/v2/elections?key=AIzaSyAEDMe9X4hv9FNSqjYEBaCnPCguHK44rfY')
