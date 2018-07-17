@@ -1,3 +1,8 @@
+/* Must install the following denpendencies for this shit to work:
+* npm install --save react-navigation
+* npm install --save expo
+*/
+
 import React from 'react';
 import { StyleSheet, Text, View, Button } from 'react-native';
 import { Font } from 'expo';
