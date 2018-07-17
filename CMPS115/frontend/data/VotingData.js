@@ -96,6 +96,7 @@ class FlatListItem extends React.Component {
           flexDirection: 'column',
         }}>
         <Text style={styles.FlatListItemStyle}>{this.props.item.name}</Text>
+        <Text style={styles.FlatListItemStyle}>{this.props.item.party}</Text>
         </View>
 
       </View>
