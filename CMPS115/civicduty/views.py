@@ -23,11 +23,27 @@ def hello(request):
 
     return render(request, "civicduty/hello.html", args)
 
+def get_image(name):
+
+    query_link = 'https://www.googleapis.com/customsearch/v1?key=AIzaSyBUk7qSUlrZZwukgMVCM7ba40aPXQpn8LY&cx=016697662841277014273:1nlnkvf0z7i&q='
+    images = requests.get(query_link + name + '&searchType=image').json()
+    return (images['items'][0]['link'])
+
 # get representatives.
 class RepresentativesAPI(APIView):
 
     def get(self, request):
-        reps = requests.get('https://www.googleapis.com/civicinfo/v2/representatives?key=AIzaSyAEDMe9X4hv9FNSqjYEBaCnPCguHK44rfY&address=92129').json()
+        reps = requests.get('https://www.googleapis.com/civicinfo/v2/representatives?key=AIzaSyAEDMe9X4hv9FNSqjYEBaCnPCguHK44rfY&address=95064').json()
+        #for person in reps['officials']:
+        #    if 'photoUrl' not in person:
+        #        person['photoUrl'] = get_image(person['name'])
+
+        #    if person['party'] == 'Republican':
+        #        person['color'] = 'red'
+        #    elif person['party'] == 'Democratic':
+        #        person['color'] = 'blue'
+        #    else:
+        #        person['color'] = 'gray'
 
         return Response(reps)
 
@@ -35,7 +51,20 @@ class RepresentativesAPI(APIView):
     def post(self, request):
         data = request.data
         zip = data['zip'].strip()
+
         reps = requests.get('https://www.googleapis.com/civicinfo/v2/representatives?address=' + zip + '&key=AIzaSyAEDMe9X4hv9FNSqjYEBaCnPCguHK44rfY').json()
+        #for person in reps['officials']:
+        #    if 'photoUrl' not in person:
+        #        person['photoUrl'] = get_image(person['name'])
+
+        #    if person['party'] == 'Republican':
+        #        person['color'] = 'red'
+        #    elif person['party'] == 'Democratic':
+        #        person['color'] = 'blue'
+        #    else:
+        #        person['color'] = 'gray'
+
+        #reps['img'] = somelinkasiofhoaig
 
         return Response(reps)
 
