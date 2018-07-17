@@ -27,7 +27,14 @@ def hello(request):
 class RepresentativesAPI(APIView):
 
     def get(self, request):
-        reps = requests.get('https://www.googleapis.com/civicinfo/v2/representatives?key=AIzaSyAEDMe9X4hv9FNSqjYEBaCnPCguHK44rfY&address=92129').json()
+        reps = requests.get('https://www.googleapis.com/civicinfo/v2/representatives?key=AIzaSyAEDMe9X4hv9FNSqjYEBaCnPCguHK44rfY&address=95064').json()
+        for person in reps['officials']:
+            if person['party'] == 'Republican':
+                person['color'] = 'red'
+            elif person['party'] == 'Democratic':
+                person['color'] = 'blue'
+            else:
+                person['color'] = 'gray'
 
         return Response(reps)
 
@@ -36,6 +43,7 @@ class RepresentativesAPI(APIView):
         data = request.data
         zip = data['zip'].strip()
         reps = requests.get('https://www.googleapis.com/civicinfo/v2/representatives?address=' + zip + '&key=AIzaSyAEDMe9X4hv9FNSqjYEBaCnPCguHK44rfY').json()
+        #reps['img'] = somelinkasiofhoaigs
 
         return Response(reps)
 
