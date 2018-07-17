@@ -2,7 +2,6 @@ import React from 'react';
 import { FlatList, StyleSheet, Text, View, Button } from 'react-native';
 
 export default class App extends React.Component {
-<<<<<<< HEAD
   render() {
     return (
       <View style={styles.container}>
@@ -10,7 +9,7 @@ export default class App extends React.Component {
       </View>
     );
   }
-=======
+
     constructor(props) {
         super(props);
         this.state = {
@@ -67,7 +66,6 @@ export default class App extends React.Component {
             </View>
         );
     }
->>>>>>> be9f644b73c63841b2c0f74cc92f424755d40c76
 }
 
 const styles = StyleSheet.create({
