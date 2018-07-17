@@ -1,13 +1,10 @@
 import React from 'react';
-import { FlatList, StyleSheet, Text, View, Button, Image } from 'react-native';
+import { FlatList, StyleSheet, Text, View, Button, Image, TouchableOpacity } from 'react-native';
 
 
 export default class VotingData extends React.Component {
     constructor(props) {
         super(props);
-        state = {
-          dataSource: [],
-        }
         this.state = {
             title: 'hey'
         }
@@ -15,16 +12,7 @@ export default class VotingData extends React.Component {
     }
 
     componentDidMount() {
-        {/*return fetch('https://www.googleapis.com/civicinfo/v2/elections?key=AIzaSyAEDMe9X4hv9FNSqjYEBaCnPCguHK44rfY')
-            .then((response) => response.json())
-            .then((responseJson) => {
 
-            this.setState({
-                dataSource: responseJson.elections,
-            }, function() {
-
-            });
-        })*/}
         return fetch('http://civic-duty.herokuapp.com/representative/', {
             method: 'POST',
             headers: {
@@ -64,6 +52,7 @@ export default class VotingData extends React.Component {
           <View style={styles.MainContainer}>
                 <FlatList
                     data = {this.state.dataSource}
+                    keyExtractor={(item, index) => index.toString()}
                     renderItem={({item, index})=>{
                       return (
                         <FlatListItem item={item} index={index}>
@@ -79,29 +68,37 @@ export default class VotingData extends React.Component {
 }
 
 class FlatListItem extends React.Component {
-  render() {
-    return (
-      <View style={{
-        flex: 1,
-        flexDirection: 'row',
-        backgroundColor: this.props.index % 2 == 0 ? '#CC0000':'#FFFFFF',
-      }}>
-        <Image
-          source={{uri: this.props.item.photoUrl}}
-          style={{width: 100, height: 100, margin: 5}}
-        >
-        </Image>
-        <View style={{
-          flex: 1,
-          flexDirection: 'column',
-        }}>
-        <Text style={styles.FlatListItemStyle}>{this.props.item.name}</Text>
-        <Text style={styles.FlatListItemStyle}>{this.props.item.party}</Text>
-        </View>
+  _onPress = () => {
+   this.props.onPressItem(this.props.id);
+ };
 
-      </View>
-    );
-  }
+ render() {
+   const textColor = this.props.selected ? "red" : "black";
+   return (
+    <View style={{
+      flex: 1,
+      flexDirection: 'row',
+      backgroundColor: this.props.index % 2 == 0 ? '#CC0000' : '#FFFFFF',
+    }}>
+      <Image
+      source={{uri: this.props.item.photoUrl}}
+      style={{width: 100, height: 100, margin: 5}}
+    >
+    </Image>
+    <View style={{
+      flex: 1,
+      flexDirection: 'column',
+    }}>
+     <TouchableOpacity onPress={this._onPress}>
+       <View>
+       <Text style={styles.FlatListItemStyle}>{this.props.item.name}</Text>
+       <Text style={styles.FlatListItemStyle}>{this.props.item.party}</Text>
+       </View>
+     </TouchableOpacity>
+    </View>
+  </View>
+   );
+ }
 }
 
 const styles = StyleSheet.create({
@@ -117,8 +114,8 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     backgroundColor: '#FFFFFF',
     marginTop: 50,
-},
-FlatListItemStyle: {
+  },
+  FlatListItemStyle: {
     padding: 10,
     fontSize: 18,
     height: 44,
