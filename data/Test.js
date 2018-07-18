@@ -1,4 +1,4 @@
-/* Must install the following denpendencies for this shit to work:
+/* Must install the following denpendencies:
 * npm install --save react-navigation
 * npm install --save expo
 */
@@ -8,6 +8,7 @@ import { StyleSheet, Text, View, Button } from 'react-native';
 import { Font } from 'expo';
 import { StackNavigator } from 'react-navigation';
 import VotingData from './assets/data/VotingData';
+
 
 
 class MainPage extends React.Component {
@@ -84,7 +85,7 @@ class ListOfRepresentativesPage extends React.Component {
   render() {
     return (
       <View style={styles.container}>
-        <VotingData />
+          <VotingData />
       </View>
     );
   }
