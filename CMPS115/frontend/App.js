@@ -9,6 +9,7 @@ import { Font } from 'expo';
 import { StackNavigator } from 'react-navigation';
 import VotingData from './assets/data/VotingData';
 
+<<<<<<< HEAD
 
 
 class MainPage extends React.Component {
@@ -28,10 +29,41 @@ class MainPage extends React.Component {
       'Baskerville': require('./assets/fonts/Baskerville.ttf'),
     });
     this.setState({ fontLoaded: true });
+=======
+class App extends React.Component {
+  state = {
+    spinner: false
+  };
+
+  async handleFetch(url) {
+    try {
+      this.setState({ spinner: true });
+      const response = await fetch(url, {
+        method: "POST",
+        headers: {
+          Accept: "application/json",
+          "Content-Type": "application/json"
+        },
+        body: JSON.stringify({
+          zip: "92129"
+        })
+      });
+      const dataSource = response.json();
+      this.setState({ dataSource: result.officials, spinner: false });
+    } catch (e) {
+      this.setState({ spinner: false });
+      console.error(error);
+    }
+  }
+
+  componentDidMount() {
+    this.handleFetch("http://civic-duty.herokuapp.com/representative/");
+>>>>>>> abd76a8bbea42fbe21763f4d3fb6073408bccdef
   }
 
   render() {
     return (
+<<<<<<< HEAD
       <View style={styles.container}>
       {
         this.state.fontLoaded ? (
@@ -65,10 +97,23 @@ class FindRepScreen extends React.Component {
         <Button
         title="List of Reps"
         onPress={() => this.props.navigation.push('ListOfRepsPage')}
+=======
+      <View style={{ flex: 1, paddingTop: 20 }}>
+        {this.state.spinner && <Spinner />}
+        <FlatList
+          data={this.state.dataSource}
+          renderItem={({ item }) => (
+            <Text>
+              {item.name}, {item.party}, {/*{item.ocdDivisionId}*/}
+            </Text>
+          )}
+          keyExtractor={(item, index) => index.toString()}
+>>>>>>> abd76a8bbea42fbe21763f4d3fb6073408bccdef
         />
       </View>
     );
   }
+<<<<<<< HEAD
 }
 
 class ListOfRepresentativesPage extends React.Component {
@@ -217,3 +262,6 @@ const styles = StyleSheet.create({
     alignItems: 'center',
   },
 });
+=======
+}
+>>>>>>> abd76a8bbea42fbe21763f4d3fb6073408bccdef

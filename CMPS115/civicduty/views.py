@@ -8,21 +8,6 @@ import requests
 def index(request):
     return render(request, "civicduty/index.html")
 
-def hello(request):
-
-    # the third parameter is a dictionary object with all the data I want
-    # to pass into the view.
-
-    # could do a dictionary with the key as the city, value as the population.
-    populations = [100000, 200000, 300000, 400000, 500000]
-
-    args = {
-        'name': 'Bryan',
-        'populations': populations,
-    }
-
-    return render(request, "civicduty/hello.html", args)
-
 def get_image(name):
 
     query_link = 'https://www.googleapis.com/customsearch/v1?key=AIzaSyBUk7qSUlrZZwukgMVCM7ba40aPXQpn8LY&cx=016697662841277014273:1nlnkvf0z7i&q='
@@ -34,9 +19,9 @@ class RepresentativesAPI(APIView):
 
     def get(self, request):
         reps = requests.get('https://www.googleapis.com/civicinfo/v2/representatives?key=AIzaSyAEDMe9X4hv9FNSqjYEBaCnPCguHK44rfY&address=95064').json()
-        #for person in reps['officials']:
-        #    if 'photoUrl' not in person:
-        #        person['photoUrl'] = get_image(person['name'])
+        for person in reps['officials']:
+            if 'photoUrl' not in person:
+                person['photoUrl'] = get_image(person['name'])
 
         #    if person['party'] == 'Republican':
         #        person['color'] = 'red'
@@ -53,9 +38,9 @@ class RepresentativesAPI(APIView):
         zip = data['zip'].strip()
 
         reps = requests.get('https://www.googleapis.com/civicinfo/v2/representatives?address=' + zip + '&key=AIzaSyAEDMe9X4hv9FNSqjYEBaCnPCguHK44rfY').json()
-        #for person in reps['officials']:
-        #    if 'photoUrl' not in person:
-        #        person['photoUrl'] = get_image(person['name'])
+        for person in reps['officials']:
+            if 'photoUrl' not in person:
+                person['photoUrl'] = get_image(person['name'])
 
         #    if person['party'] == 'Republican':
         #        person['color'] = 'red'

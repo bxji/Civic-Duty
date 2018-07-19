@@ -59,9 +59,6 @@ export default class VotingData extends React.Component {
                         <FlatListItem item={item} index={index}>
                         </FlatListItem>);
                     }}
-                    //ItemSeparatorComponent = {this.FlatListItemSeparator}
-                    //keyExtractor={(item,index) => index.toString()}
-                    //renderItem = {({item}) => <Text style={styles.FlatListItemStyle}>{item.name}</Text>}
                 />
           </View>
         );
