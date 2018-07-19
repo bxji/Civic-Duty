@@ -1,50 +1,50 @@
-import React from 'react';
-import { FlatList, StyleSheet, Text, View, Button } from 'react-native';
-
-class App extends React.Component {
-  state = {
-    spinner: false
-  };
-
-  async handleFetch(url) {
-    try {
-      this.setState({ spinner: true });
-      const response = await fetch(url, {
-        method: "POST",
-        headers: {
-          Accept: "application/json",
-          "Content-Type": "application/json"
-        },
-        body: JSON.stringify({
-          zip: "92129"
-        })
-      });
-      const dataSource = response.json();
-      this.setState({ dataSource: result.officials, spinner: false });
-    } catch (e) {
-      this.setState({ spinner: false });
-      console.error(error);
+import {
+    StyleSheet,
+    Text,
+    View } from 'react-native';
+  import React from 'react';
+  import { createStackNavigator } from 'react-navigation'
+  
+  //screen import(s) for the splash screen
+  import MainPage from './screens/MainPage'
+  
+  //screen import(s) for links on the splash screen
+  import FindRepPage from './screens/FindRepPage'
+  //import RegisterToVotePage from './screens/RegisterToVotePage'
+  import InfoPage from './screens/InfoPage'
+  
+  //screen import(s) for links of the links on the splash screen
+  //import ListOfRepresentativePage from './screens/ListOfRepresentativePage'
+  import DemSenatorPage from './screens/DemSenatorPage'
+  //import RepubSenatorPage from './screens/RepubSenatorPage'
+  import DemHouseRepPage from './screens/DemHouseRepPage'
+  import RepubHouseRepPage from './screens/RepubHouseRepPage'
+  //import ZipCodeInputPage from './screens/ZipCodeInputPage'
+  
+  
+  //import VotingData from './assets/data/VotingData'
+  
+  //Main driver that starts the app. Calls AppNavigator
+  export default class App extends React.Component {
+    render() {
+      return (
+        <AppNavigator/>
+      );
     }
   }
-
-  componentDidMount() {
-    this.handleFetch("http://civic-duty.herokuapp.com/representative/");
-  }
-
-  render() {
-    return (
-      <View style={{ flex: 1, paddingTop: 20 }}>
-        {this.state.spinner && <Spinner />}
-        <FlatList
-          data={this.state.dataSource}
-          renderItem={({ item }) => (
-            <Text>
-              {item.name}, {item.party}, {/*{item.ocdDivisionId}*/}
-            </Text>
-          )}
-          keyExtractor={(item, index) => index.toString()}
-        />
-      </View>
-    );
-  }
-}
+  
+  
+  //creates a stack navigator. creates the ablility to navigate pages
+  const AppNavigator = createStackNavigator ({
+    MainPage : { screen: MainPage },
+    FindRepPage : { screen: FindRepPage },
+    //RegisterToVotePage : { screeen: RegisterToVotePage },
+    InfoPage : { screen: InfoPage },
+    //ListOfRepresentativePage: { screen: ListOfRepresentativePage},
+    DemSenatorPage : { screen: DemSenatorPage },
+    //RepubSenatorPage : { screen: RepubSenatorPage },
+    DemHouseRepPage : { screen: DemHouseRepPage },
+    RepubHouseRepPage : { screen: RepubHouseRepPage }
+    //ZipCodeInputPage : { screen: ZipCodeInputPage },
+  
+  })
