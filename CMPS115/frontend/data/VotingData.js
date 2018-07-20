@@ -1,5 +1,6 @@
 import React from 'react';
 import { FlatList, StyleSheet, Text, View, Button, Image, TouchableOpacity } from 'react-native';
+import { StackNavigator } from 'react-navigation';
 
 
 export default class VotingData extends React.Component {
@@ -69,8 +70,8 @@ export default class VotingData extends React.Component {
 
 class FlatListItem extends React.Component {
   _onPress = () => {
-   this.props.onPressItem(this.props.id);
- };
+    this.props.navigation.push('Details')
+  }
 
  render() {
    const textColor = this.props.selected ? "red" : "black";
@@ -100,6 +101,40 @@ class FlatListItem extends React.Component {
    );
  }
 }
+
+class RepPage extends React.Component {
+  state = {
+    fontLoaded: false,
+  }
+  static navigationOptions = {
+    headerStyle: {
+      backgroundColor: '#CC0000',
+    },
+  };
+
+  render() {
+    return (
+      <View style={styles.container}>
+      </View>
+    );
+  }
+}
+
+const RootStack = StackNavigator(
+  {
+    Home: {
+      screen: FlatListItem,
+    },
+    Details: {
+      screen: RepPage,
+    },
+  },
+  {
+    initialRouteName: 'Home',
+  }
+);
+
+
 
 const styles = StyleSheet.create({
   container: {
