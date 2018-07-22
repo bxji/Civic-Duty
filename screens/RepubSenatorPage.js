@@ -24,7 +24,7 @@ export default class RepubSenatorPage extends Component {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#dadb0d',
+    backgroundColor: '#CC0000',
     alignItems: 'center',
   },
   textTitle: {

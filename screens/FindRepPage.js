@@ -3,17 +3,23 @@ import {
   StyleSheet,
   Text,
   View,
+  TouchableOpacity,
 } from 'react-native';
-import VotingData from '../assets/data/VotingData'
 
 export default class FindRepPage extends Component {
-  static navigationOptions = ({ navigation }) => ({
-    title: navigation.state.params.title
-  })
+  onLearnMore = () => {
+    this.props.navigation.navigate('Test', {title: 'TEST'})
+  }
 
   render() {
     return (
-      <VotingData/>
+      <TouchableOpacity
+        //key={index}
+        //style={styles.item}
+        onPress={() => this.onLearnMore()}
+      >
+        <Text style={styles.itemText}>Test Link</Text>
+      </TouchableOpacity>
     );
   }
 }

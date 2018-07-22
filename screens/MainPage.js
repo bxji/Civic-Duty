@@ -3,11 +3,8 @@ import {
   Text,
   View,
   TouchableOpacity,
-  AppRegistry,
 } from 'react-native';
 import React from 'react';
-import { DrawerNavigator, createStackNavigator, TabNavigator } from 'react-navigation'
-
 
 const items = [
   {name: 'Find Your Rep'},
@@ -18,10 +15,11 @@ const items = [
 export default class MainPage extends React.Component {
   onLearnMore = (item,index) => {
     if(index == 0){
-      this.props.navigation.navigate('FindRepPage', {title: item.name})
+      //this.props.navigation.navigate('ZipCodeInputPage', {title: item.name})
+      this.props.navigation.navigate('ZipCodeInputPage', {title: item.name})
     }
     else if(index == 1){
-      this.props.navigation.navigate('DemSenatorPage', {title: item.name})
+      this.props.navigation.navigate('RegisterToVotePage', {title: item.name})
     }
     else{
       this.props.navigation.navigate('InfoPage', {title: item.name})
