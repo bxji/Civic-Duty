@@ -1,19 +1,23 @@
-import React from 'react';
-import { FlatList, StyleSheet, Text, View, Button, Image, TouchableOpacity } from 'react-native';
-import { StackNavigator } from 'react-navigation';
+import {
+  FlatList,
+  StyleSheet,
+  Text,
+  View,
+  Image,
+  TouchableOpacity } from 'react-native';
+import React, { Component } from 'react';
 
-
-export default class VotingData extends React.Component {
-    constructor(props) {
-        super(props);
+export default class VotingData extends Component {
+    constructor() {
+        super();
         this.state = {
-            title: 'hey'
+            title: 'test'
         }
-        this.title = "hi";
     }
 
+    //fectches the data from our webserver on herokuapp
     componentDidMount() {
-
+        const zipCode = this.props.navigation.getParam('zipCode','Wrong Zip Code');
         return fetch('http://civic-duty.herokuapp.com/representative/', {
             method: 'POST',
             headers: {
@@ -21,12 +25,11 @@ export default class VotingData extends React.Component {
                 'Content-Type': 'application/json',
             },
             body: JSON.stringify({
-                zip: '92129',
+                zip: zipCode,
             })
         })
         .then((response) => response.json())
             .then((responseJson) => {
-
                 this.setState({
                     dataSource: responseJson.officials,
                 }, function() {
@@ -37,6 +40,7 @@ export default class VotingData extends React.Component {
             console.error(error);
         });
     }
+    //formats each piece of data by separating it item with lines and a background
     FlatListItemSeparator = () => {
     return (
       <View
@@ -48,104 +52,55 @@ export default class VotingData extends React.Component {
       />
     );
   }
+  candidatesPage = (item) => {
+    if(item.party == 'Republican') {
+        this.props.navigation.navigate('RepubSenatorPage', {title: item.name});
+    }
+    if(item.party == 'Democratic') {
+      this.props.navigation.navigate('DemHouseRepPage', {title: item.name});
+    }
+  }
     render() {
         return (
-          <View style={styles.MainContainer}>
-                <FlatList
-                    data = {this.state.dataSource}
-                    keyExtractor={(item, index) => index.toString()}
-                    renderItem={({item, index})=>{
-                      return (
-                        <FlatListItem item={item} index={index}>
-                        </FlatListItem>);
-                    }}
-                />
+          <View>
+            <FlatList
+              data = {this.state.dataSource}
+              keyExtractor={(item, index) => index.toString()}
+              renderItem={({item, index})=>
+                <TouchableOpacity onPress={() => this.candidatesPage(item)}>
+                <View style={{
+                  flex: 1,
+                  flexDirection: 'row',
+                  backgroundColor: '#919793',
+                }}>
+                  <Image
+                  source={{uri: item.photoUrl}}
+                  style={{width: 100, height: 100, margin: 5}}
+                >
+                </Image>
+                <View style={{
+                  flex: 1,
+                  flexDirection: 'column',
+                }}>
+                   <View>
+                      <Text style={styles.FlatListItemStyle}>{item.name}</Text>
+                      <Text style={styles.FlatListItemStyle}>{item.party}</Text>
+                   </View>
+                </View>
+              </View>
+                </TouchableOpacity>}
+            />
           </View>
         );
     }
 }
 
-class FlatListItem extends React.Component {
-  _onPress = () => {
-    this.props.navigation.push('Details')
-  }
-
- render() {
-   const textColor = this.props.selected ? "red" : "black";
-   return (
-    <View style={{
-      flex: 1,
-      flexDirection: 'row',
-      backgroundColor: this.props.index % 2 == 0 ? '#CC0000' : '#FFFFFF',
-    }}>
-      <Image
-      source={{uri: this.props.item.photoUrl}}
-      style={{width: 100, height: 100, margin: 5}}
-    >
-    </Image>
-    <View style={{
-      flex: 1,
-      flexDirection: 'column',
-    }}>
-     <TouchableOpacity onPress={this._onPress}>
-       <View>
-       <Text style={styles.FlatListItemStyle}>{this.props.item.name}</Text>
-       <Text style={styles.FlatListItemStyle}>{this.props.item.party}</Text>
-       </View>
-     </TouchableOpacity>
-    </View>
-  </View>
-   );
- }
-}
-
-class RepPage extends React.Component {
-  state = {
-    fontLoaded: false,
-  }
-  static navigationOptions = {
-    headerStyle: {
-      backgroundColor: '#CC0000',
-    },
-  };
-
-  render() {
-    return (
-      <View style={styles.container}>
-      </View>
-    );
-  }
-}
-
-const RootStack = StackNavigator(
-  {
-    Home: {
-      screen: FlatListItem,
-    },
-    Details: {
-      screen: RepPage,
-    },
-  },
-  {
-    initialRouteName: 'Home',
-  }
-);
-
-
-
 const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
   MainContainer :{
     justifyContent: 'center',
     flex:1,
     flexDirection: 'row',
-    backgroundColor: '#FFFFFF',
-    marginTop: 50,
+    backgroundColor: '#CC0000',
   },
   FlatListItemStyle: {
     padding: 10,
