@@ -14,10 +14,9 @@ export default class VotingData extends Component {
             title: 'test'
         }
     }
-
     //fectches the data from our webserver on herokuapp
     componentDidMount() {
-        const zipCode = this.props.navigation.getParam('zipCode','Wrong Zip Code');
+        const zipCode = this.props.navigation.getParam('zipCode','address');
         return fetch('http://civic-duty.herokuapp.com/representative/', {
             method: 'POST',
             headers: {
@@ -52,12 +51,17 @@ export default class VotingData extends Component {
       />
     );
   }
+  //function that navigates to either the republican or democrat page
   candidatesPage = (item) => {
     if(item.party == 'Republican') {
-        this.props.navigation.navigate('RepubSenatorPage', {title: item.name});
+        this.props.navigation.navigate('RepubHouseRepPage',
+        {title: item.name,
+         uri: item.photoUrl});
     }
     if(item.party == 'Democratic') {
-      this.props.navigation.navigate('DemHouseRepPage', {title: item.name});
+      this.props.navigation.navigate('DemHouseRepPage',
+      {title: item.name,
+       uri: item.photoUrl});
     }
   }
     render() {
