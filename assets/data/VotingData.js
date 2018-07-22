@@ -63,6 +63,11 @@ export default class VotingData extends Component {
       {title: item.name,
        uri: item.photoUrl});
     }
+    if(item.party == 'Independent' || item.party == 'Nonpartisan') {
+      this.props.navigation.navigate('IndepHouseRepPage',
+      {title: item.name,
+       uri: item.photUrl})
+    }
   }
     render() {
         return (
