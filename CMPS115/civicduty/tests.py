@@ -92,6 +92,8 @@ class PollingTestCases(TestCase):
 
             election_id = election['id']
 
+            address['electionId'] = election_id
+
             google_output = requests.get(link + '&address=' + address['street'] + ' ' + address['city'] + ' ' + address['state'] + '&electionId=' + election_id).json()
             my_output = requests.post('http://civic-duty.herokuapp.com/polling/', address).json()
 
