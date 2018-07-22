@@ -8,12 +8,9 @@ import {
 } from 'react-native';
 import { Font } from 'expo';
 
-var repName = "Kamala Harris" // placeholder for where we put the rep's name from API
-var repPicture = require('../debugimages/kamalaharris.jpg') // placeholder for where we put the rep's picture from API
-
 export default class DemHouseRepPage extends Component {
   static navigationOptions = ({ navigation }) => ({
-    title: repName,
+    title: navigation.state.params.title,
     headerStyle: {
       backgroundColor: '#2B60DE'
     },
@@ -42,7 +39,7 @@ export default class DemHouseRepPage extends Component {
     return (
       <View style={styles.container}>
         <Image
-          source={repPicture} // we will put the image from the API here
+          source={{uri:this.props.navigation.getParam('uri')}} // image from the API
           style={styles.image}
         />
         <FlatList // This flat list displays each issue and where the reps stands on it.

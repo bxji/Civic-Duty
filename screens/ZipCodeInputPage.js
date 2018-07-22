@@ -38,7 +38,7 @@ export default class ZipCodeInputPage extends Component {
     };
   }
 
-  /**Constructors for Go Button */
+  //button function that navigates to VotingData, passes zipCode and address
   _onPressButton(zipCode,address) {
 
         this.props.navigation.navigate('VotingData', {zipCode,address})
@@ -63,8 +63,7 @@ export default class ZipCodeInputPage extends Component {
         </View>
         <View>
           <Button
-            //zipCode={this.state.zipCode}
-            onPress={() => this._onPressButton(this.state.zipCode,this.state.address)}
+            onPress={() => this._onPressButton(this.state.zipCode,this.state.address)} // passess users zipcode/address to onPressButton
             title='Submit'
             color='#CC0000'
           />
