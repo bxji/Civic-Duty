@@ -6,21 +6,26 @@ import React from 'react';
 import { createStackNavigator } from 'react-navigation'
 
 //screen import(s) for the splash screen
-import MainPage from './screens/MainPage'
+import MainPage    from './screens/MainPage'
 
 //screen import(s) for links on the splash screen
 import FindRepPage from './screens/FindRepPage'
 //import RegisterToVotePage from './screens/RegisterToVotePage'
-import InfoPage from './screens/InfoPage'
+import InfoPage    from './screens/InfoPage'
 
 //screen import(s) for links of the links on the splash screen
 //import ListOfRepresentativePage from './screens/ListOfRepresentativePage'
-import DemSenatorPage from './screens/DemSenatorPage'
-//import RepubSenatorPage from './screens/RepubSenatorPage'
-//import ZipCodeInputPage from './screens/ZipCodeInputPage'
+import RegisterToVotePage from './screens/RegisterToVotePage'
+import DemSenatorPage     from './screens/DemSenatorPage'
+import DemHouseRepPage    from './screens/DemHouseRepPage'
+import IndepHouseRepPage  from './screens/IndepHouseRepPage'
+import RepubSenatorPage   from './screens/RepubSenatorPage'
+import RepubHouseRepPage  from './screens/RepubHouseRepPage'
+import ZipCodeInputPage   from './screens/ZipCodeInputPage'
 
 
-//import VotingData from './assets/data/VotingData'
+import VotingData from './assets/data/VotingData'
+//import Test       from './screens/Test'
 
 //Main driver that starts the app. Calls AppNavigator
 export default class App extends React.Component {
@@ -36,11 +41,17 @@ export default class App extends React.Component {
 const AppNavigator = createStackNavigator ({
   MainPage : { screen: MainPage },
   FindRepPage : { screen: FindRepPage },
-  //RegisterToVotePage : { screeen: RegisterToVotePage },
+  RegisterToVotePage : { screen: RegisterToVotePage },
+  DemSenatorPage : { screen: DemSenatorPage },
+  //DemHouseRepPage : { screen: DemHouseRepPage },
+  IndepHouseRepPage : { screen: IndepHouseRepPage },
   InfoPage : { screen: InfoPage },
   //ListOfRepresentativePage: { screen: ListOfRepresentativePage},
-  DemSenatorPage : { screen: DemSenatorPage },
-  //RepubSenatorPage : { screen: RepubSenatorPage },
-  //ZipCodeInputPage : { screen: ZipCodeInputPage },
-
-})
+  VotingData : { screen: VotingData},
+  //Test : { screen: Test },
+  DemHouseRepPage : { screen: DemHouseRepPage },
+  VotingData : { screen: VotingData },
+  RepubSenatorPage : { screen: RepubSenatorPage },
+  RepubHouseRepPage : { screen: RepubHouseRepPage },
+  ZipCodeInputPage : { screen: ZipCodeInputPage },
+});
