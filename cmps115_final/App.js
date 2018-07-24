@@ -14,7 +14,7 @@ import FindRepPage from './screens/FindRepPage'
 import InfoPage    from './screens/InfoPage'
 
 //screen import(s) for links of the links on the splash screen
-//import ListOfRepresentativePage from './screens/ListOfRepresentativePage'
+
 import RegisterToVotePage from './screens/RegisterToVotePage'
 import DemSenatorPage     from './screens/DemSenatorPage'
 import DemHouseRepPage    from './screens/DemHouseRepPage'
@@ -25,7 +25,6 @@ import ZipCodeInputPage   from './screens/ZipCodeInputPage'
 
 
 import VotingData from './assets/data/VotingData'
-//import Test       from './screens/Test'
 
 //Main driver that starts the app. Calls AppNavigator
 export default class App extends React.Component {
@@ -43,12 +42,9 @@ const AppNavigator = createStackNavigator ({
   FindRepPage : { screen: FindRepPage },
   RegisterToVotePage : { screen: RegisterToVotePage },
   DemSenatorPage : { screen: DemSenatorPage },
-  //DemHouseRepPage : { screen: DemHouseRepPage },
   IndepHouseRepPage : { screen: IndepHouseRepPage },
   InfoPage : { screen: InfoPage },
-  //ListOfRepresentativePage: { screen: ListOfRepresentativePage},
   VotingData : { screen: VotingData},
-  //Test : { screen: Test },
   DemHouseRepPage : { screen: DemHouseRepPage },
   VotingData : { screen: VotingData },
   RepubSenatorPage : { screen: RepubSenatorPage },

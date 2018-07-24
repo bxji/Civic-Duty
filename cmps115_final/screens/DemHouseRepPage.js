@@ -40,7 +40,7 @@ export default class DemHouseRepPage extends Component {
         />
         <Text style={styles.textBody}>{this.props.navigation.getParam('party')}</Text>
         <Text style={styles.textBody}>{this.props.navigation.getParam('addressline1')}</Text>
-        <Text style={styles.textBody}>{this.props.navigation.getParam('addressline2')}, {this.props.navigation.getParam('city')}, 
+        <Text style={styles.textBody}>{this.props.navigation.getParam('addressline2')}, {this.props.navigation.getParam('city')},
       {this.props.navigation.getParam('state')} {this.props.navigation.getParam('zip')}</Text>
         <Text style={styles.textBody}>{this.props.navigation.getParam('phone')}</Text>
         <Text style={styles.textBody}>{this.props.navigation.getParam('url')}</Text>
