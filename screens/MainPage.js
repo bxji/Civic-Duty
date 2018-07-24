@@ -13,9 +13,18 @@ const items = [
 ]
 
 export default class MainPage extends React.Component {
+  static navigationOptions = ({ navigation }) => ({
+    headerStyle: {
+      backgroundColor: '#919793'
+    },
+    headerTitleStyle: {
+      fontWeight: 'bold',
+      color: '#FFFFFF'
+    }
+  })
+
   onLearnMore = (item,index) => {
     if(index == 0){
-      //this.props.navigation.navigate('ZipCodeInputPage', {title: item.name})
       this.props.navigation.navigate('ZipCodeInputPage', {title: item.name})
     }
     else if(index == 1){
@@ -42,6 +51,7 @@ export default class MainPage extends React.Component {
       <View style={styles.container}>
         <Text style={styles.text}>Civic Duty</Text>
         {items.map(this.renderItem)}
+        <Text style={styles.versionText}> {'version 1.0.0'}</Text>
       </View>
     );
   }
@@ -61,13 +71,18 @@ const styles = StyleSheet.create({
     alignItems: 'center',
   },
   item: {
-    padding: 10,
+    padding: 5,
     alignItems: 'center',
   },
   itemText: {
     color: 'white',
     fontSize: 20,
     alignItems: 'center',
-    marginTop: 40,
-  }
+    marginTop: 60,
+  },
+  versionText: {
+    fontSize: 10,
+    color: '#FFFFFF',
+    marginTop: 180,
+  },
 });

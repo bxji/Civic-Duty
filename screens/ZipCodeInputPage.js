@@ -24,8 +24,14 @@ class UselessTextInput extends Component {
 
 export default class ZipCodeInputPage extends Component {
   static navigationOptions = ({ navigation }) => ({
-
-    title: navigation.state.params.title
+    title: navigation.state.params.title,
+    headerStyle: {
+      backgroundColor: '#919793'
+    },
+    headerTitleStyle: {
+      fontWeight: 'bold',
+      color: '#FFFFFF'
+    }
   })
 
   /**Constructors for all text input field
@@ -54,18 +60,18 @@ export default class ZipCodeInputPage extends Component {
             placeholder="Address"
             placeholderTextColor="#FFFFFF"
             onChangeText={(address) => this.setState({address})} />
-
+            
           <TextInput
             style={{height: 40}}
             placeholder="Zip"
             placeholderTextColor="#FFFFFF"
             onChangeText={(zipCode) => this.setState({zipCode})} />
         </View>
-        <View>
+        <View style={{padding: 20}}>
           <Button
             onPress={() => this._onPressButton(this.state.zipCode,this.state.address)} // passess users zipcode/address to onPressButton
             title='Submit'
-            color='#CC0000'
+            color='#919793'
           />
         </View>
       </View>
