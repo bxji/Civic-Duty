@@ -51,3 +51,14 @@ the Expo app
 well-known as majority house whip, etc).
 * One API only has 100 free requests per day, so sometimes images won’t load. We believe we have a fix for it, but it still may happen.
 * Some links may be broken, no method to check for right now.
+
+### Unit Testing
+
+* React Native uses JavaScript unit testing to test for bugs and errors.
+* To run the unit test do the following:
+* Open the terminal
+* Change the directory to the project folder
+* Enter the script: 'npm test'
+* Evaluate error log
+
+* For more addtional [info](https://facebook.github.io/react-native/docs/testing) about JavaScript unit test.
