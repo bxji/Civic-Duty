@@ -97,7 +97,7 @@ export default class RegisterToVotePage extends Component {
 
     // console.log('value: ', value);
   }
-//navigator sucks
+
   static navigationOptions = ({ navigation }) => ({
     title: navigation.state.params.title,
     headerStyle: {
