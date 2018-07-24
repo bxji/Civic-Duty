@@ -32,10 +32,6 @@ export default class RepubHouseRepPage extends Component {
     );
   };
 
-  renderHeader = () => {
-    return  <Text> On the issues... </Text>
-  };
-
   render () {
     return (
       <View style={styles.container}>
@@ -43,12 +39,11 @@ export default class RepubHouseRepPage extends Component {
           source={{uri:this.props.navigation.getParam('uri')}} // image from the API
           style={styles.image}
         />
-        <FlatList // This flat list displays each issue and where the reps stands on it.
-          data={[{key: 'This is test layout. We can put each API entry into here.'}, {key: 'This is test layout. We can put each API entry into here.'}]}
-          renderItem={({item}) => <Text>{item.key}</Text>}
-          ItemSeparatorComponent={this.renderSeparator}
-          ListHeaderComponent={this.renderHeader}
-        />
+        <Text style={styles.textBody}>{this.props.navigation.getParam('party')}</Text>
+        <Text style={styles.textBody}>{this.props.navigation.getParam('addressline1')}</Text>
+        <Text style={styles.textBody}>{this.props.navigation.getParam('addressline2')}, {this.props.navigation.getParam('city')}, {this.props.navigation.getParam('state')} {this.props.navigation.getParam('zip')}</Text>
+        <Text style={styles.textBody}>{this.props.navigation.getParam('phone')}</Text>
+        <Text style={styles.textBody}>{this.props.navigation.getParam('url')}</Text>
       </View>
     )
   }
@@ -66,11 +61,12 @@ const styles = StyleSheet.create({
     color: '#FFFFFF',
   },
   image: {
+    margin: 10,
     height: 100,
     borderRadius: 50,
-    width: 100
+    width: 100,
   },
   textBody: {
     color: "#FFFFFF"
-  }
+  },
 });

@@ -9,7 +9,7 @@ import React from 'react';
 const items = [
   {name: 'Find Your Rep'},
   {name: 'Register To Vote'},
-  {name: 'Info'},
+  {name: 'Info'}
 ]
 
 export default class MainPage extends React.Component {
@@ -30,7 +30,7 @@ export default class MainPage extends React.Component {
     else if(index == 1){
       this.props.navigation.navigate('RegisterToVotePage', {title: item.name})
     }
-    else{
+    else {
       this.props.navigation.navigate('InfoPage', {title: item.name})
     }
   }

@@ -24,7 +24,7 @@ export default class VotingData extends Component {
         color: '#FFFFFF'
       }
     })
-    //fectches the data from our webserver on herokuapp
+    // fetches the data from our webserver on herokuapp
     componentDidMount() {
         const zipCode = this.props.navigation.getParam('zipCode','address');
         return fetch('http://civic-duty.herokuapp.com/representative/', {
@@ -66,17 +66,41 @@ export default class VotingData extends Component {
     if(item.party == 'Republican') {
         this.props.navigation.navigate('RepubHouseRepPage',
         {title: item.name,
-         uri: item.photoUrl});
+         uri: item.photoUrl,
+         party: item.party,
+         addressline1: item.address.line1,
+         addressline2: item.address.line2,
+         city: item.address.city,
+         state: item.address.state,
+         zip: item.address.zip,
+         phone: item.phones,
+         url: item.urls});
     }
     if(item.party == 'Democratic') {
       this.props.navigation.navigate('DemHouseRepPage',
       {title: item.name,
-       uri: item.photoUrl});
+        uri: item.photoUrl,
+        party: item.party,
+        addressline1: item.address.line1,
+        addressline2: item.address.line2,
+        city: item.address.city,
+        state: item.address.state,
+        zip: item.address.zip,
+        phone: item.phones,
+        url: item.urls});
     }
     if(item.party == 'Independent' || item.party == 'Nonpartisan' || item.party == 'Unknown') {
       this.props.navigation.navigate('IndepHouseRepPage',
       {title: item.name,
-       uri: item.photoUrl})
+        uri: item.photoUrl,
+        party: item.party,
+        addressline1: item.address.line1,
+        addressline2: item.address.line2,
+        city: item.address.city,
+        state: item.address.state,
+        zip: item.address.zip,
+        phone: item.phones,
+        url: item.urls});
     }
   }
     render() {
