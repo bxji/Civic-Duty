@@ -55,12 +55,7 @@ export default class ZipCodeInputPage extends Component {
       //<View style={s.overlay}/>,
       <View style={{padding: 60, backgroundColor:'#919793', flex:1}}>
         <View>
-          <TextInput
-            style={{height: 40}}
-            placeholder="Address"
-            placeholderTextColor="#FFFFFF"
-            onChangeText={(address) => this.setState({address})} />
-            
+
           <TextInput
             style={{height: 40}}
             placeholder="Zip"
@@ -79,3 +74,10 @@ export default class ZipCodeInputPage extends Component {
     );
   }
 }
+
+/* Address code. Haven't implemented address features yet.
+<TextInput
+  style={{height: 40}}
+  placeholder="Address"
+  placeholderTextColor="#FFFFFF"
+  onChangeText={(address) => this.setState({address})} />*/

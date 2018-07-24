@@ -3,6 +3,8 @@
 //npm install tcomb-form-native
 //npm i react-native-modal-dropdown
 //npm install --save react-native-material-dropdown
+import React, { Component } from 'react';
+import CheckboxFormX from 'react-native-checkbox-form';
 import {
   ScrollView,
   StyleSheet,
@@ -10,13 +12,12 @@ import {
   View,
   Linking,
   Button,
+  TouchableHighlight,
 } from 'react-native';
 import { Font } from 'expo';
 import t from 'tcomb-form-native';
 import ModalDropdown from 'react-native-modal-dropdown';
 import { Dropdown } from 'react-native-material-dropdown';
-import React, { Component } from 'react';
-import CheckboxFormX from 'react-native-checkbox-form';
 
 var Positive = t.refinement(t.Number, function (n) {  //Funtion that sets age to be over 18
   return n > 17;
@@ -44,21 +45,29 @@ const User = t.struct({
 });
 
 //Those are the options for all the declarations
-var options = {};
+// var options = {
+//   fields: {
+//
+//   }
+// };
+
+
 const options = {
   fields: {
     Citizen: {
-      help: 'You have to be a US citizen to vote', //help message
       error: 'Only US citizens can register to vote ', //in case of not entering value this message pops
-      required: ' (required)' //this option is required
+      required: ' (required)', //this option is required
+
+
     },
     FirstName: {
       error: 'You must enter your First Name ',
-      required: ' (required)'
+      required: ' (required)',
+
     },
     LastName: {
       error: 'You must enter your Last Name ',
-      required: ' (required)'
+      required: ' (required)',
     },
     Email: {
       error: 'Insert a valid email ',
@@ -107,17 +116,16 @@ export default class RegisterToVotePage extends Component {
 
   render () {
     return (
-      <ScrollView style={styles.scroll}>
+      <ScrollView>
         <View style={styles.container}>
-          <Form style={styles.button}
+          <Form
             ref={c => this._form = c}
             type={User}
             options={options} // pass the options via props
           />
-          <Button style={styles.button}
-            title="Sign Up!"
-            onPress={this.handleSubmit}
-          />
+          <TouchableHighlight style={styles.button} onPress={this.handleSubmit} underlayColor='#99d9f4'>
+            <Text style={styles.buttonText}>Register Now!</Text>
+          </TouchableHighlight>
         </View>
      </ScrollView>
     )
@@ -126,26 +134,31 @@ export default class RegisterToVotePage extends Component {
 
 
 
-const styles = StyleSheet.create({
+var styles = StyleSheet.create({
   container: {
-    flex: 10,
+    flex: 500,
     backgroundColor: '#919793',
-    alignItems: 'center',
-    marginVertical: 0,
+    justifyContent: 'center',
+    padding: 50,
+    marginTop: 0,
+    marginBottom: 30,
 
+  },
+  TextBoxColor: {
+    color: "white"
+  },
+  buttonText: {
+    fontSize: 18,
+    color: 'white',
+    alignSelf: 'center'
   },
   textTitle: {
     fontSize: 27,
     color: '#000000',
   },
-  buttonText: {
-    fontSize: 18,
-    color: '#000000',
-    alignSelf: 'center'
-  },
   button: {
     height: 36,
-    backgroundColor: '#919793',
+    backgroundColor: '#48BBEC',
     borderColor: '#48BBEC',
     borderWidth: 1,
     borderRadius: 8,
@@ -162,7 +175,8 @@ const formStyles = {
   ...Form.stylesheet,
   controlLabel: {
     normal: {
-      color: '#919793',
+      color: '#ffffff',
+      borderColor: '#ffffff',
       fontSize: 18,
       marginBottom: 7,
       fontWeight: '600'
