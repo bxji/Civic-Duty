@@ -1,8 +1,3 @@
-//install these dependencies
-//npm install react-native-checkbox-form --save
-//npm install tcomb-form-native
-//npm i react-native-modal-dropdown
-//npm install --save react-native-material-dropdown
 import React, { Component } from 'react';
 import CheckboxFormX from 'react-native-checkbox-form';
 import {
