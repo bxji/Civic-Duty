@@ -40,8 +40,8 @@ export default class DemHouseRepPage extends Component {
         />
         <Text style={styles.textBody}>{this.props.navigation.getParam('party')}</Text>
         <Text style={styles.textBody}>{this.props.navigation.getParam('addressline1')}</Text>
-        <Text style={styles.textBody}>{this.props.navigation.getParam('addressline2')}, {this.props.navigation.getParam('city')},
-      {this.props.navigation.getParam('state')} {this.props.navigation.getParam('zip')}</Text>
+        <Text style={styles.textBody}>{this.props.navigation.getParam('addressline2')}</Text>
+        <Text style={styles.textBody}>{this.props.navigation.getParam('city')}, {this.props.navigation.getParam('state')} {this.props.navigation.getParam('zip')}</Text>
         <Text style={styles.textBody}>{this.props.navigation.getParam('phone')}</Text>
         <Text style={styles.textBody}>{this.props.navigation.getParam('url')}</Text>
       </View>
@@ -61,7 +61,7 @@ const styles = StyleSheet.create({
     color: '#FFFFFF',
   },
   image: {
-    padding: 10,
+    margin: 15,
     height: 100,
     borderRadius: 50,
     width: 100
